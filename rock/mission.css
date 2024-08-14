@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.rock header{
+    width: 100%;
+    font-size: 30px;
+    background-color: darkgreen;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    position: fixed;
+}
+.rock header .intro p{
+    text-align: center;
+    font-size: 20px;
+}
+.rock div{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    font-size: 20px;
+}
+.rock .list{
+    padding-top: 200px;
+    padding-bottom: 95px;
+}
+.rock .list .artist1 .r p{
+    width: 100%;
+    /* background-color:#ccc; */
+    font-size: 18px;
+    text-align: center;
+    text-transform: full-width;
+}
+.rock .list1 .l p{
+    width: 100%;
+    /* background-color:#ccc; */
+    font-size: 18px;
+    text-align: center;
+    text-transform: full-width;
+}
+.rock .list1 h2{
+    text-align: center;
+}
+.rock .artist1 h2{
+    text-align: center;
+}
+.rock .list1{
+    width: 100%;
+}
+.rock .artist1{
+    width: 88%;
+}
+.rock .list1 .l{
+    /* border: 2px solid; */
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.rock .list .artist1 .r{
+    height: 40px;
+    /* border: 2px solid; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.rock footer{
+    width: 100%;
+    background-color: darkgreen;
+    position: fixed;
+    bottom: 0;
+}
+.rock footer .playlist .previous{
+    background-color: darkgreen;
+}
+.rock footer .playlist .pause{
+    background-color: darkgreen;
+}
+.rock footer .playlist .next{
+    background-color: darkgreen;
+}

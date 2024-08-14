@@ -1,0 +1,18 @@
+body {
+    background-image: url("./imageUI/uploadIMG.png");
+    /* 替換為你的圖片 URL */
+    background-size: cover;
+    /* 自動調整背景圖片大小以填滿整個屏幕 */
+    background-repeat: no-repeat;
+    /* 防止背景圖片重複 */
+    background-position: center;
+
+    background-attachment: fixed;
+
+    margin: 0;
+
+    /* padding: 20px; */
+}
+input:focus {
+    background-color: #b9d3fd;
+}
