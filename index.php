@@ -108,7 +108,7 @@ if (!empty($_POST["account"]) && !empty($_POST["password"])) {
 }
 
 ?>
-<a href="indexAcount.php">首頁</a>
+<a href="https://ohimeopp.github.io/index/"> 回html</a>
 <!DOCTYPE html>
 <html>
 

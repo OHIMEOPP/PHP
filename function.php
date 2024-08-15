@@ -2,7 +2,10 @@
 // error_reporting(0);
 // ini_set('display_errors', 0);
 require_once 'db.php';
-$user_id = 1;
+if (isset($_SESSION['user_id'][0]))
+    $user_id = $_SESSION['user_id'][0];
+else {
+}
 function mysql_fix_string($pdo, $string)
 {
     return $pdo->quote($string);
@@ -27,9 +30,9 @@ function select($sel)
     //     echo "{$sel}無法查詢" . mysqli_error($link);
     // }
     // mysqli_free_result($querySel);
-    // $data = $link->query($sel);
+    $data = $link->query($sel);
     // mysqli_free_result($querySel);
-    // return $data;
+    return $data;
 }
 function _select($sel)
 {
@@ -42,7 +45,7 @@ function currentTime()
     $current_time = date("Y-m-d H:i:s");
     return $current_time;
 }
-// function ALLupcload($_file, $time, $c_user_id, $img_type)
+function ALLupcload($_file, $time, $c_user_id, $img_type)
 {
     global $link;
     $file = $_file;
@@ -85,7 +88,7 @@ function seleticon($img_type, $user_id)
             );
         }
 
-    // return $icon;
+    return $icon;
 }
 function queryimgids($sel)
 {
