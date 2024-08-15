@@ -3,9 +3,9 @@ require_once 'db.php';
 require_once 'function.php';
 
 $time = currentTime();
-if (!$user_id) {
-    header("Location: logout.php");
-}
+// if (!$user_id) {
+//     header("Location: logout.php");
+// }
 $user = seleticon('image', $user_id);
 $icon = seleticon('icon', $user_id);
 
@@ -85,7 +85,7 @@ if (isset($_FILES['Wimage']['tmp_name'])) {
 
 // echo $_COOKIE['is_login'];
 ?>
-<?php if (!empty($_COOKIE['is_login']) && $_COOKIE['is_login']) : ?>
+
     <!DOCTYPE html>
     <html>
 
@@ -198,9 +198,9 @@ if (isset($_FILES['Wimage']['tmp_name'])) {
                 require_once 'manegerfixed.php';
             }
             ?>
-        <?php else :
-        header("Location: logout.php");
-    endif;
+        <?php
+        // header("Location: logout.php");
+
         ?>
         </div>
     </body>
