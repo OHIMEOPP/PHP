@@ -2,10 +2,7 @@
 // error_reporting(0);
 // ini_set('display_errors', 0);
 require_once 'db.php';
-if (isset($_SESSION['user_id'][0]))
-    $user_id = $_SESSION['user_id'][0];
-else {
-}
+$user_id = 1;
 function mysql_fix_string($pdo, $string)
 {
     return $pdo->quote($string);
@@ -30,9 +27,9 @@ function select($sel)
     //     echo "{$sel}無法查詢" . mysqli_error($link);
     // }
     // mysqli_free_result($querySel);
-    $data = $link->query($sel);
+    // $data = $link->query($sel);
     // mysqli_free_result($querySel);
-    return $data;
+    // return $data;
 }
 function _select($sel)
 {
@@ -88,7 +85,7 @@ function seleticon($img_type, $user_id)
             );
         }
 
-    return $icon;
+    // return $icon;
 }
 function queryimgids($sel)
 {
