@@ -23,11 +23,11 @@
         PDO::ATTR_DEFAULT_FETCH_MODE =>PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false
     ];
-    // try{
-    //     $link = new PDO($attr,$userAccount,$userPassword,$opts);
-    // }catch(PDOException $e){
-    //     throw new PDOException($e->getMessage(),(int)$e->getCode());
-    // }
+    try{
+        $link = new PDO($attr,$userAccount,$userPassword,$opts);
+    }catch(PDOException $e){
+        throw new PDOException($e->getMessage(),(int)$e->getCode());
+    }
     // $sql = "SELECT * FROM ust8";
 
     // $_SESSION['link'] = new mysqli($host,$userAccount,$userPassword,$dbName); 

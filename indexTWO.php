@@ -85,7 +85,7 @@ if (isset($_FILES['Wimage']['tmp_name'])) {
 
 // echo $_COOKIE['is_login'];
 ?>
-
+<?php if (!empty($_COOKIE['is_login']) && $_COOKIE['is_login']) : ?>
     <!DOCTYPE html>
     <html>
 
@@ -198,9 +198,9 @@ if (isset($_FILES['Wimage']['tmp_name'])) {
                 require_once 'manegerfixed.php';
             }
             ?>
-        <?php
-        // header("Location: logout.php");
-
+        <?php else :
+        header("Location: logout.php");
+    endif;
         ?>
         </div>
     </body>
