@@ -4,6 +4,7 @@
     session_start();
 
     session_unset();
-    // setcookie("is_login", "", time() - 3600);
+    setcookie("is_login", "", time() - 60 * 60 * 24, "/");
+    setcookie("uuid", "", time() - 60 * 60 * 24, "/");
     header("Location: $_myURL2");
 ?>

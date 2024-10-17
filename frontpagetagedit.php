@@ -1,12 +1,13 @@
 <?php
 require_once 'function.php';
-
+ob_start();
 if (isset($_POST['check_tag_chose']) && isset($_POST['radio_tag_chose'])) {
     $type = $_POST['radio_tag_chose'][0];
     $check_tag_chose = $_POST['check_tag_chose'];
     foreach ($check_tag_chose as $v) {
         $_sel = "UPDATE `tag_data` SET `type`='$type' WHERE `tag_name`='$v'  && `creat_user_id` = {$user_id}";
-        mysqli_query($link, $_sel);
+        // mysqli_query($link, $_sel);
+        $link->query($_sel);
     }
     // $sel = "SELECT * FROM `tag_data`  WHERE `creat_user_id` = {$user_id}";
     echo "<br>";
@@ -43,3 +44,4 @@ else if (isset($_POST['edit_tagname']) && isset($_POST['radio_tag_chose'])) {
    
 }
 header("Location: indexTWO.php?are=frontpage");
+ob_end_flush();

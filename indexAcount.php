@@ -1,5 +1,6 @@
 <?php
-$loginURL = "http://localhost/PHPcode/index.php";
+ob_start();
+$loginURL = "./index.php";
 require_once 'function.php';
 ?>
 <!DOCTYPE html>
@@ -36,7 +37,7 @@ require_once 'function.php';
 </head>
 
 <body>
-    <?php if (isset($_SESSION['is_login']) && $_SESSION['is_login'] == true) : //如果是已登入狀態，則跳到登入後頁面
+    <?php if (isset($_COOKIE['is_login']) && $_COOKIE['is_login'] == true) : //如果是已登入狀態，則跳到登入後頁面
         header('Location: indexTWO.php?are=frontpage'); ?>
     <?php else :
         if (isset($_SESSION['msg'])) { //沒有則回到登入頁面
@@ -98,4 +99,5 @@ require_once 'function.php';
 </script>
 <?php
 // mysqli_close($link);
+ob_end_flush();
 ?>

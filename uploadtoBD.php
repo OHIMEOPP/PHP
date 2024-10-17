@@ -1,6 +1,7 @@
 <?php
 require_once 'function.php';
 $canAlert = false;
+
 //檢查有沒有放檔案
 if (isset($_FILES['uploadimg']['name']) && $_FILES['uploadimg']['name'] != '' || isset($_POST['uploadimg']) && $_POST['uploadimg'] != '') :
     //檢查檔案類型
@@ -90,20 +91,19 @@ if (isset($_FILES['uploadimg']['name']) && $_FILES['uploadimg']['name'] != '' ||
                             }
                         }
                         if ($ss == "false") {
-                            $_sel = "INSERT INTO `tag_data`(`tag_name`,`creat_user_id`) VALUES ('$v','$user_id')";
+                            $_sel = "INSERT INTO `tag_data`(`tag_name`,`creat_user_id`,`type`) VALUES ('$v','$user_id','')";
                             $link->query($_sel);
                         }
 
                         // }
                     }
                     else{
-                        $_sel = "INSERT INTO `tag_data`(`tag_name`,`creat_user_id`) VALUES ('$v','$user_id')";
+                        $_sel = "INSERT INTO `tag_data`(`tag_name`,`creat_user_id`,`type`) VALUES ('$v','$user_id','')";
                             $link->query($_sel);
                     }
                 }
                 $n = "./uploadimg/" .  $uploadimg;
                 move_uploaded_file($_FILES['uploadimg']['tmp_name'][$d], $n);
-
                 $canAlert = true;
             endif;
         } else echo "Is not an accepted image file";

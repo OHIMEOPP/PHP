@@ -1,33 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <button>asd</button>
-</body>
-</html>
 <?php 
     @session_start();
-    $host = "localhost";
+    $host = "other-mysql";
     $userAccount = "root";
     $userPassword = "J9012015";
     $dbName = "my_db";
     $chrs = "utf8mb4";
     $attr = "mysql:host=$host;dbname=$dbName;charset=$chrs";
-   
+//   echo $host;
+    
     $opts = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE =>PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false
     ];
-    // try{
-    //     $link = new PDO($attr,$userAccount,$userPassword,$opts);
-    // }catch(PDOException $e){
-    //     throw new PDOException($e->getMessage(),(int)$e->getCode());
-    // }
+    // phpinfo();
+    try{
+        $link = new PDO($attr,$userAccount,$userPassword,$opts);
+    }catch(PDOException $e){
+        throw new PDOException($e->getMessage(),(int)$e->getCode());
+    }
     // $sql = "SELECT * FROM ust8";
 
     // $_SESSION['link'] = new mysqli($host,$userAccount,$userPassword,$dbName); 

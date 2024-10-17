@@ -8,7 +8,7 @@ $time = currentTime();
 $_javaURL = "https://script.google.com/macros/s/AKfycbwbYeFHFeZCu0IIdCwbU5TzKGizQCgCLBElzDmz_EM5Z-oLSi4BAHFDMkBFnF2fDrRtgQ/exec";
 
 $frontpage = "indexTWO.php?are=frontpage"; //https://ohimeopp.github.io/index/indexTWO.html
-$loginpage = "indexAcount.php"; //https://ohimeopp.github.io/index/index.html
+$loginpage = "./indexAcount.php"; //https://ohimeopp.github.io/index/index.html
 // 檢查登入涵式
 function login()
 {
@@ -16,7 +16,7 @@ function login()
     global $frontpage; //https://ohimeopp.github.io/index/indexTWO.html
     global $loginpage; //https://ohimeopp.github.io/index/index.html
 
-    $searchAccount =  $_POST["account"]; // 要尋找的值
+    $searchAccount = $_POST["account"]; // 要尋找的值
     $searchPassword = $_POST["password"]; // 要尋找的值
 
     $sel = $link->prepare("SELECT * FROM `user_account` WHERE `account`=? && `password`=?");
@@ -42,8 +42,9 @@ function login()
                 )
             );
         }
-        $_SESSION['is_login'] = true;
         setcookie('is_login', "true", time() + 60 * 60 * 24, "/");
+        if (empty($_COOKIE['uuid']))
+            setcookie('uuid', uniqid(), time() + 60 * 60 * 24, "/");
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['select_sort'] = "ID";
         // header("Location: $frontpage");
@@ -68,7 +69,9 @@ function signUp()
     $querySel = false;
     //要增加的帳密
     $check_img_type = array(
-        'icon', 'image', 'Wimage'
+        'icon',
+        'image',
+        'Wimage'
     );
 
     $increaseAccount = $_POST['increaseaccount'];

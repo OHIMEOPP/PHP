@@ -2,7 +2,11 @@
 // error_reporting(0);
 // ini_set('display_errors', 0);
 require_once 'db.php';
-$user_id = 1;
+if (isset($_SESSION['user_id'][0]))
+    $user_id = $_SESSION['user_id'][0];
+else {
+}
+// echo $user_id;
 function mysql_fix_string($pdo, $string)
 {
     return $pdo->quote($string);
@@ -27,9 +31,9 @@ function select($sel)
     //     echo "{$sel}無法查詢" . mysqli_error($link);
     // }
     // mysqli_free_result($querySel);
-    // $data = $link->query($sel);
+    $data = $link->query($sel);
     // mysqli_free_result($querySel);
-    // return $data;
+    return $data;
 }
 function _select($sel)
 {
@@ -62,9 +66,9 @@ function queryAccount()
     foreach ($data as $row1 => $v) {
         $user = array(
             'id' =>
-            $v['id'],
+                $v['id'],
             'name' =>
-            $v['name']
+                $v['name']
         );
     }
     return $user;
@@ -85,7 +89,7 @@ function seleticon($img_type, $user_id)
             );
         }
 
-    // return $icon;
+    return $icon;
 }
 function queryimgids($sel)
 {
@@ -188,7 +192,7 @@ function imgdisplay($user, $G_tag)
     echo "<div class='incontent'>";
     echo "<div class='contentblock' >";
 
-    while ($start <= $end) :
+    while ($start <= $end):
 
         //一般圖庫的情況
         if ($user[$start]['check_img_type'] == 'HTTP') {
@@ -222,7 +226,11 @@ function imgdisplay($user, $G_tag)
         echo "第 ";
         for ($i = 1; $i <= $pages; $i++) {
             if ($page - 7 < $i && $i < $page + 7) {
-                echo "<a href=?tag=" . $G_tag .  "&&page=" . $i . ">" . $i . "</a> ";
+                if($i == $page){
+                    echo "<a href=?tag=" . $G_tag . "&&page=" . $i . "' style='color:white;'>" . $i . "</a> ";
+                }else{
+                    echo "<a href=?tag=" . $G_tag . "&&page=" . $i . ">" . $i . "</a> ";
+                }
             }
         }
         if ($pages != $page) {
@@ -242,7 +250,11 @@ function imgdisplay($user, $G_tag)
         echo "第 ";
         for ($i = 1; $i <= $pages; $i++) {
             if ($page - 7 < $i && $i < $page + 7) {
-                echo "<a href=?page=" . $i . ">" . $i . "</a> ";
+                if($i == $page){
+                    echo "<a href=?page=" . $i . "' style='color:white;'>" . $i . "</a> ";
+                }else{
+                    echo "<a href=?page=" . $i . ">" . $i . "</a> ";
+                }
             }
         }
         if ($pages != $page) {
@@ -252,90 +264,88 @@ function imgdisplay($user, $G_tag)
     }
 }
 function selectsort($select_sort, $user_id, $inputtag)
-
 {
     // $select_sort = $_POST['select_sort'];
-    if (empty($inputtag)){
+    if (empty($inputtag)) {
         switch ($select_sort) {
             case "ID":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} order by `id` ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `id` ";
                 break;
             case "圖片名稱":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} order by `img_path`  ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `img_path`  ";
                 break;
             case "上傳日期":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} order by `upload_date` desc";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `upload_date` desc";
                 break;
             case "人物":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} order by `mainTag` desc ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `mainTag` desc ";
                 break;
             case "團體":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} order by `secondaryTag`  ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `secondaryTag`  ";
                 break;
             case "作者":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} order by `ArtistTag`  ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `ArtistTag`  ";
                 break;
             case "public":
-                $sel = "SELECT * FROM `img_data`   WHERE `ispublic` = 'public'&& `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `upload_date` desc  ";
+                $sel = "SELECT * FROM `img_data`   WHERE `ispublic` = 'public' && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `upload_date` desc  ";
                 break;
             case "人物未修改":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} && `mainTag` = '' ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' && `mainTag` = '' ";
                 break;
             case "團體未修改":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} && `secondaryTag` = '' ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' && `secondaryTag` = '' ";
                 break;
             case "作者未修改":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} && `ArtistTag` = '' ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' && `ArtistTag` = '' ";
                 break;
             case "其他標籤未修改":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} && `anothertag` = '' ";
+                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' && `anothertag` = '' ";
                 break;
         }
-    }
-    else{
+    } else {
         switch ($select_sort) {
             case "ID":
-                $sel = "SELECT * FROM img_data WHERE `creat_user_id` = {$user_id} && `anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `id`;";
                 break;
             case "圖片名稱":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `img_path`  ";
                 break;
             case "上傳日期":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `upload_date` desc";
                 break;
             case "人物":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `mainTag` desc ";
                 break;
             case "團體":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `secondaryTag`  ";
                 break;
             case "作者":
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `ArtistTag`  ";
                 break;
             case "public":
-                $sel = "SELECT * FROM `img_data`   WHERE `ispublic` = 'public'&& `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  && `anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `ispublic` = 'public' && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  && `anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `upload_date` desc  ";
                 break;
             case "人物未修改":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} && `mainTag` = ''  && (`anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id} && `mainTag` = ''  && (`anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' )";
                 break;
             case "團體未修改":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} && `secondaryTag` = ''  && (`anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id} && `secondaryTag` = ''  && (`anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' )";
                 break;
             case "作者未修改":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} && `ArtistTag` = ''  && (`anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id} && `ArtistTag` = ''  && (`anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' )";
                 break;
             case "其他標籤未修改":
-                $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id} && `anothertag` = ''  && (`anotherTag` 
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id} && `anothertag` = ''  && (`anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' )";
                 break;
         }
@@ -355,33 +365,40 @@ function tag_img_quantity($inputtag, $status)
     //取得圖片資料(或排序)
     $user = queryimgids($sel);
 
-    if (isset($inputtag) && $inputtag  && $user) {
+    if (isset($inputtag) && $inputtag && $user) {
         //遍歷圖片資訊
         //取圖片所有圖片標籤 another tag 包括人物 團體 作者等
         foreach ($user as $row1 => $v) {
             //處理當下圖片標籤 another tag 以逗號分割
-            $anotherTag =  explode(",", $user[$row1]['anotherTag']);
+            if (!empty($user[$row1]['anotherTag'])) {
+                $anotherTag = explode(",", $user[$row1]['anotherTag']);
 
-            array_push($anotherTag, $user[$row1]['mainTag']);
-            array_push($anotherTag, $user[$row1]['secondaryTag']);
-            array_push($anotherTag, $user[$row1]['ArtistTag']);
-
-            //檢查當下圖片有沒有被查詢的tag 如果有 ，資訊填入陣列
-            if (in_array($inputtag, $anotherTag)) {
-                $tagsimg[] = array(
-                    'anotherTag' => $anotherTag,
-                    'img_path' => $user[$row1]['img_path'],
-                    'id' => $user[$row1]['id'],
-                    'check_img_type' => $user[$row1]['check_img_type'],
-                    'mainTag' => $user[$row1]['mainTag'],
-                    'secondaryTag' => $user[$row1]['secondaryTag'],
-                    'ArtistTag' => $user[$row1]['ArtistTag']
-                );
+                //檢查當下圖片有沒有被查詢的tag 如果有 ，資訊填入陣列
+                if (in_array($inputtag, $anotherTag)) {
+                    $tagsimg[] = array(
+                        'anotherTag' => $anotherTag
+                    );
+                }
             }
         }
-        if (isset($tagsimg))
+        if (!empty($tagsimg))
             return count($tagsimg);
-        else
-            return 0;
+
     }
+}
+function countmysql($tag, $tagType, $status)
+{
+    global $link;
+    global $user_id;
+    if ($status == 'single')
+        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` = '$tag' && `creat_user_id` = $user_id ";
+    else {
+        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` = '$tag' &&  `ispublic` = 'public' ";
+    }
+    $stmt = $link->prepare($sql);
+    $stmt->execute();
+    $cc = $stmt->fetchColumn();
+
+    if (!empty($tag))
+        return $cc;
 }

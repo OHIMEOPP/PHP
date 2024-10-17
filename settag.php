@@ -1,6 +1,6 @@
 <?php
 require_once 'function.php';
-
+ob_start();
 //檢查有沒有設定tag
 if (isset($_POST['set_maintag']) || isset($_POST['set_secondarytag']) || isset($_POST['set_artisttag']) || isset($_POST['set_anothertag'])) :
 
@@ -58,11 +58,11 @@ if (isset($_POST['set_maintag']) || isset($_POST['set_secondarytag']) || isset($
                 }
             }
             if ($ss == "false") {
-                $_sel = "INSERT INTO `tag_data`(`tag_name`,`creat_user_id`) VALUES ('$v','$user_id')";
+                $_sel = "INSERT INTO `tag_data`(`tag_name`,`creat_user_id`,`type`) VALUES ('$v','$user_id','')";
                 $link->query($_sel);
             }
         }else{
-            $_sel = "INSERT INTO `tag_data`(`tag_name`,`creat_user_id`) VALUES ('$v','$user_id')";
+            $_sel = "INSERT INTO `tag_data`(`tag_name`,`creat_user_id`,`type`) VALUES ('$v','$user_id','')";
                 $link->query($_sel);
         }
     }
@@ -70,4 +70,5 @@ if (isset($_POST['set_maintag']) || isset($_POST['set_secondarytag']) || isset($
 
     echo '<script>alert("修改成功");</script>';
     header("Location: indexTWO.php?img_id=$img_id");
+    ob_end_flush();
 endif;
