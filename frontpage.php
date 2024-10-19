@@ -51,7 +51,6 @@ function typechose($dbname, $s_tagtype, $user_id)
                 $tag = json_encode($tag);
                 return $tag;
             }
-            break;
         case 'img_data':
             $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id}";
             $imgs = queryimgids($sel);

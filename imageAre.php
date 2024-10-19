@@ -1,16 +1,5 @@
 <?php
 require_once 'function.php';
-// include 'function.php';
-// $testsel =  "SELECT * FROM `tag_data` WHERE `creat_user_id`='$user_id'";
-// $testtag = querytagids($testsel);
-
-// $array = [];
-// foreach($testtag as $f => $g){
-//     array_push($array, $g['tag_name']);
-// }
-// $uniqueArray = array_unique($array);
-// $duplicates = array_diff_assoc($array, $uniqueArray);
-// print_r($array);
 ?>
 <div class="imgAre_out">
     <div class="imgAre">

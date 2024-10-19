@@ -101,15 +101,15 @@
 
 .warningicon label img {
     display: flex;
-    border: 1px ridge #f00;
+    border: 5px ridge rgb(0, 0, 0);
     border-radius: 100%;
     bottom: 0rem;
     background-repeat: no-repeat;
     background-position: top;
     background-size: 100%;
-    margin: 0%;
-    width: 75px;
-    height: 73px;
+    /* margin: 20px; */
+    width: 100px;
+    height: 100px;
 }
 
 .warningIMG {

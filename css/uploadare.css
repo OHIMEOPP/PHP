@@ -52,7 +52,7 @@
 .up_tag{
     background-color: rgba(159, 202, 242, 0.7);
     border-radius: 20px;
-    padding: 10px;
+    /* padding: 5px; */
 }
 .input_tag{
     display:flex;
