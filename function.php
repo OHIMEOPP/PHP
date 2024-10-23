@@ -153,12 +153,12 @@ function current_img($sel, $data_c)
     $all_img_array = [];
     foreach ($all_img as $_k => $_v) {
         if (!in_array($_v[$data_c], $all_img_array))
-            if ($_v[$data_c] != null){
+            if ($_v[$data_c] != null) {
                 $explode_data = explode(',', $_v[$data_c]);
-                foreach($explode_data as $datas)
-                if (!in_array($datas, $all_img_array))
-                array_push($all_img_array, $datas);
-            } 
+                foreach ($explode_data as $datas)
+                    if (!in_array($datas, $all_img_array))
+                        array_push($all_img_array, $datas);
+            }
     }
 
     return $all_img_array;
@@ -270,70 +270,70 @@ function selectsort($select_sort, $user_id, $inputtag)
 {
     // $select_sort = $_POST['select_sort'];
     if (empty($inputtag)) {
-                switch ($select_sort) {
-                    case "ID":
-                        $order = 'order by id';
-                        break;
-                    case "圖片名稱":
-                        $order = 'order by img_path';
-                        break;
-                    case "上傳日期":
-                        $order = 'order by upload_date desc';
-                        break;
-                    case "人物":
-                        $order = 'order by mainTag';
-                        break;
-                    case "團體":
-                        $order = 'order by secondaryTag';
-                        break;
-                    case "作者":
-                        $order = 'order by ArtistTag';
-                        break;
-                    case "人物未修改":
-                        $order = " && `mainTag` = '' ";
-                        break;
-                    case "團體未修改":
-                        $order = " && `secondaryTag` = '' ";
-                        break;
-                    case "作者未修改":
-                        $order = " && `ArtistTag` = '' ";
-                        break;
-                    case "其他標籤未修改":
-                        $order = " && `anothertag` = '' ";
-                        break;
-                }
-                $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  $order ";
-                if($select_sort == "public") 
-                    $sel = "SELECT * FROM `img_data`   WHERE `ispublic` = 'public' && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `upload_date` desc  ";
+        switch ($select_sort) {
+            case "ID":
+                $order = 'order by id';
+                break;
+            case "圖片名稱":
+                $order = 'order by img_path';
+                break;
+            case "上傳日期":
+                $order = 'order by upload_date desc';
+                break;
+            case "人物":
+                $order = 'order by mainTag';
+                break;
+            case "團體":
+                $order = 'order by secondaryTag';
+                break;
+            case "作者":
+                $order = 'order by ArtistTag';
+                break;
+            case "人物未修改":
+                $order = " && `mainTag` = '' ";
+                break;
+            case "團體未修改":
+                $order = " && `secondaryTag` = '' ";
+                break;
+            case "作者未修改":
+                $order = " && `ArtistTag` = '' ";
+                break;
+            case "其他標籤未修改":
+                $order = " && `anothertag` = '' ";
+                break;
+        }
+        $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  $order ";
+        if ($select_sort == "public")
+            $sel = "SELECT * FROM `img_data`   WHERE `ispublic` = 'public' && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `upload_date` desc  ";
     } else {
         switch ($select_sort) {
             case "ID":
-                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
-                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `id`;";
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && (`anotherTag` 
+                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%') order by `id`;";
                 break;
             case "圖片名稱":
-                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
-                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `img_path`  ";
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && (`anotherTag` 
+                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%') order by `img_path`  ";
                 break;
             case "上傳日期":
-                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
-                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `upload_date` desc";
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && (`anotherTag` 
+                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%') order by `upload_date` desc";
                 break;
             case "人物":
-                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
-                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `mainTag` desc ";
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && (`anotherTag` 
+                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%') order by `mainTag` desc ";
                 break;
             case "團體":
-                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
-                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `secondaryTag`  ";
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && (`anotherTag` 
+                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%')order by `secondaryTag`  ";
                 break;
             case "作者":
-                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && `anotherTag` 
-                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `ArtistTag`  ";
+                $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && (`anotherTag` 
+                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%') order by `ArtistTag`  ";
                 break;
             case "public":
-                $sel = "SELECT * FROM `img_data` WHERE `ispublic` = 'public' && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  && `anotherTag` 
-                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%' order by `upload_date` desc  ";
+                $sel = "SELECT * FROM `img_data` WHERE `ispublic` = 'public' && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  && (`anotherTag` 
+                LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%') order by `upload_date` desc  ";
                 break;
             case "人物未修改":
                 $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id} && `mainTag` = ''  && (`anotherTag` 
