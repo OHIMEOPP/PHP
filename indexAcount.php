@@ -42,7 +42,7 @@ require_once 'function.php';
                         <div class="passwordzone">
                             <input id="password" type="password" value="" placeholder="輸入密碼" required='required'><br>
                             <a href="#">
-                                <i class="material-icons" onclick="swdisplay('password')">visibility</i>
+                                <i class="material-icons" id="material-icons" onclick="swdisplay('password')">visibility_off</i>
                             </a>
                         </div>
                         <input type="submit" value="登入" class="submit" onclick="xhraccount()">
@@ -104,14 +104,17 @@ require_once 'function.php';
         const password = document.getElementById("password");
         const signzon = document.getElementById("signzone");
         const loginzon = document.getElementById("login");
+        const material_icons = document.getElementById("material-icons");
         switch (item) {
             case "password":
                 if (password.type == "password") {
                     password.type = "text";
+                    material_icons.textContent = "visibility";
                 }
 
                 else {
                     password.type = "password";
+                    material_icons.textContent = "visibility_off";
                 }
                 break;
             case "signzone":

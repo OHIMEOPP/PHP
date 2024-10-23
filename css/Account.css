@@ -94,6 +94,7 @@ input:focus {
 }
 .submit{
     cursor: pointer;
+    background-color: rgb(164, 205, 238);
 }
 .switch-register{
     margin: 10px;
