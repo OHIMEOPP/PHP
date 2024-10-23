@@ -153,8 +153,12 @@ function current_img($sel, $data_c)
     $all_img_array = [];
     foreach ($all_img as $_k => $_v) {
         if (!in_array($_v[$data_c], $all_img_array))
-            if ($_v[$data_c] != null)
-                array_push($all_img_array, $_v[$data_c]);
+            if ($_v[$data_c] != null){
+                $explode_data = explode(',', $_v[$data_c]);
+                foreach($explode_data as $datas)
+                if (!in_array($datas, $all_img_array))
+                array_push($all_img_array, $datas);
+            } 
     }
 
     return $all_img_array;

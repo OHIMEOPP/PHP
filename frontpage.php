@@ -53,16 +53,9 @@ function typechose($dbname, $s_tagtype, $user_id)
             }
         case 'img_data':
             $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id}";
-            $imgs = queryimgids($sel);
-            if (isset($imgs)) {
-                $all_tag_array = [];
-                foreach ($imgs as $_k => $_v) {
-                    if (!in_array($_v[$s_tagtype], $all_tag_array)) {
-                        if ($_v[$s_tagtype] != null) {
-                            array_push($all_tag_array, $_v[$s_tagtype]);
-                        }
-                    }
-                }
+            $all_tag_array = current_img($sel, $s_tagtype);
+            if (isset($all_tag_array)) {
+
                 if (!empty($all_tag_array)) {
                     $all_tag_array = json_encode($all_tag_array);
                     return $all_tag_array;
