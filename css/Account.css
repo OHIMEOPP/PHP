@@ -1,7 +1,7 @@
 body {
     /* background-image: url("./imageUI/uploadIMG.png"); */
     background-image: none;
-    background-color: rgb(198, 204, 208);
+    background-color: rgb(225, 234, 239);
     /* 替換為你的圖片 URL */
     background-size: cover;
     /* 自動調整背景圖片大小以填滿整個屏幕 */

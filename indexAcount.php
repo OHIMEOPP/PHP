@@ -45,19 +45,25 @@ require_once 'function.php';
                                 <i class="material-icons" onclick="swdisplay('password')">visibility</i>
                             </a>
                         </div>
-
-                    </form><input type="submit" value="登入" class="submit" onclick="xhraccount()">
+                        <input type="submit" value="登入" class="submit" onclick="xhraccount()">
+                        <div class="switch-register">
+                            還沒有帳號嗎?<a onclick="swdisplay('signzone')">註冊帳號</a>
+                        </div>
+                    </form>
                     <!-- <form action='<?php echo $loginURL; ?>' method="post">
                         <input type="text" name="NAME">
                         <button type="submit">搜尋密碼</button>
 
                     </form> -->
+
                 </div>
                 <div>
-                    <div class="switch-register">
-                        還沒有帳號嗎?<a onclick="swdisplay('signzone')">註冊帳號</a>
-                    </div>
+
+
                     <form action='<?php echo $loginURL; ?>' method="post" id="signzone" style="display:none">
+                        <div class="switch-login">
+                            <a onclick="swdisplay('signzone')" style="cursor: pointer">返回登入</a>
+                        </div>
                         <input type="text" name="increaseaccount" id="account" placeholder="輸入帳號">
                         <div class="tab"></div>
                         <input type="text " name="increasepassword" id="password" placeholder="輸入密碼">
@@ -100,20 +106,23 @@ require_once 'function.php';
         const loginzon = document.getElementById("login");
         switch (item) {
             case "password":
-                if (password.type == "password")
+                if (password.type == "password") {
                     password.type = "text";
+                }
+
                 else {
                     password.type = "password";
                 }
                 break;
             case "signzone":
-                if (signzon.style.display == "none")
+                if (signzon.style.display == "none") {
+                    loginzon.style.display = "none";
                     signzon.style.display = "block";
-                // loginzon.style.display = "none";
-                // console.log(loginzon);
+                }
+                // console.log(signzon);
                 else {
                     signzon.style.display = "none";
-                    // loginzon.style.display = "block";
+                    loginzon.style.display = "block";
                 }
                 break;
         }
