@@ -18,9 +18,7 @@
     /* align-items: center; */
     /* background-color: rgb(37, 43, 48); */
 }
-.img_are{
-    /* display: flex; */
-}
+
 .img_are img{
     /* width:1000px ; */
     /* padding: 20px; */
@@ -52,7 +50,7 @@
 .up_tag{
     background-color: rgba(159, 202, 242, 0.7);
     border-radius: 20px;
-    /* padding: 5px; */
+    padding: 10px;
 }
 .input_tag{
     display:flex;

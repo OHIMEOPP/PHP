@@ -38,7 +38,7 @@ $tag_type = json_encode($tag_type);
                 <div class="up_tag">
                     <div class="img_are_input">
                         <input id="cl" onclick="chagebutton()" placeholder="" style=display:none>
-                        <label for="cl">🔄</label>
+                        <label for="cl"><i class="material-icons">change_circle</i></label>
                         <input type="file" id="img_are_input" accept="image/*" name="uploadimg[]" multiple>
                         <input type="text" id="img_are_input_text" name="uploadimg" style="display:none"
                             placeholder="輸入圖片位址(非網址)">
