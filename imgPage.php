@@ -173,12 +173,12 @@ $url = "https://zh.moegirl.org.cn/";
                         </a>
                         <a href="#">
                             <?php
-                            echo tag_img_quantity($v, 'single');
+                            echo countmysql($v,'anotherTag', 'single');
                             ?>
                         </a>
                         <a href="#">
                             <?php
-                            echo tag_img_quantity($v, 'group');
+                            echo countmysql($v,'anotherTag', 'group');
                             ?>
                         </a>
                     </li>

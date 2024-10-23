@@ -1,3 +1,6 @@
+.img_are_input .material-icons{
+    color: rgb(64, 51, 129);
+}
 .upload_are p{
     color: rgb(1, 40, 131);
 }
@@ -78,8 +81,15 @@ textarea{
     width: 300px;
     background-color: rgba(80, 125, 167, 0.7);
 }
+.source_zone{
+    position: relative;
+}
 #demo{
-    max-height: 200px;
+    position:absolute;
+    top: 0px;
+    right: 25px;
+    max-height: 300px;
+    width: 550px;
     /* max-width: 500px; */
 }
 #demo a{

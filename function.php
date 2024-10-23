@@ -146,7 +146,6 @@ function current_tag($colname, $sel)
         return $all_tag_array;
     }
 }
-
 function current_img($sel, $data_c)
 {
     $all_img = queryimgids($sel);
@@ -352,48 +351,14 @@ function selectsort($select_sort, $user_id, $inputtag)
     }
     return $sel;
 }
-function tag_img_quantity($inputtag, $status)
-{
-    global $user_id;
-
-    if ($status == 'single')
-        $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = $user_id ";
-    else {
-        $sel = "SELECT * FROM `img_data` WHERE `ispublic` = 'public' ";
-    }
-
-    //取得圖片資料(或排序)
-    $user = queryimgids($sel);
-
-    if (isset($inputtag) && $inputtag && $user) {
-        //遍歷圖片資訊
-        //取圖片所有圖片標籤 another tag 包括人物 團體 作者等
-        foreach ($user as $row1 => $v) {
-            //處理當下圖片標籤 another tag 以逗號分割
-            if (!empty($user[$row1]['anotherTag'])) {
-                $anotherTag = explode(",", $user[$row1]['anotherTag']);
-
-                //檢查當下圖片有沒有被查詢的tag 如果有 ，資訊填入陣列
-                if (in_array($inputtag, $anotherTag)) {
-                    $tagsimg[] = array(
-                        'anotherTag' => $anotherTag
-                    );
-                }
-            }
-        }
-        if (!empty($tagsimg))
-            return count($tagsimg);
-
-    }
-}
 function countmysql($tag, $tagType, $status)
 {
     global $link;
     global $user_id;
     if ($status == 'single')
-        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` = '$tag' && `creat_user_id` = $user_id ";
+        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` LIKE '%$tag%' && `creat_user_id` = $user_id ";
     else {
-        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` = '$tag' &&  `ispublic` = 'public' ";
+        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` LIKE '%$tag%' &&  `ispublic` = 'public' ";
     }
     $stmt = $link->prepare($sql);
     $stmt->execute();

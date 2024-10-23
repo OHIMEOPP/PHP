@@ -1,6 +1,3 @@
-<style>
-    <?php require_once './css/uploadare.css' ?>
-</style>
 <?php
 require_once 'uploadtoBD.php';
 $title = '上傳區';
@@ -26,6 +23,7 @@ $tag_type = json_encode($tag_type);
 
 ?>
 <style>
+    <?php require_once './css/uploadare.css' ?>
     <?php require_once './css/switchBt.css' ?>
 </style>
 <div class="upload_are">
@@ -59,6 +57,8 @@ $tag_type = json_encode($tag_type);
                     </div>
                     <p>圖源(source)</p>
                     <div class="source_zone">
+                        <div id="demo" class="collapse">
+                        </div>
                         <div style="display:flex;">
                             <textarea id="source_textare" type="text" name="source" placeholder="source"
                                 autocomplete="off"></textarea>
@@ -75,10 +75,9 @@ $tag_type = json_encode($tag_type);
                         <div class="another_tag">
                             <div style="display:flex;">
                                 <textarea contenteditable="true" dropzone="copy" id="textare" type="text"
-                                    name="another_tag" placeholder="金髮,黑絲,藍瞳,.....(以豆號分隔)"
+                                    name="another_tag" placeholder="金髮,黑絲,藍瞳,.....(以半形豆號分隔)"
                                     autocomplete="off"></textarea>
-                                <div id="demo" class="collapse">
-                                </div>
+
                             </div>
                             <div class="relate_tags">
                                 <a href="#" onclick="closeare('c_main','main_tag')" id="c_main" data-toggle="collapse"
@@ -93,6 +92,7 @@ $tag_type = json_encode($tag_type);
                             </div>
                         </div>
                         <button type="submit" onclick="uoload_willingness()">上傳</button>
+
                     </div>
                 </div>
             </form>
@@ -157,10 +157,6 @@ $tag_type = json_encode($tag_type);
                 var aa = lastPartOfString; // 這將會印出逗號後的字串
             }
 
-            // suggestions = suggestions.filter(function (suggestion) {
-            //     return suggestion.includes(aa); // 过滤包含输入文本的提示
-
-            // });
             const filteredSuggestions = suggestions.filter(function (suggestion) {
                 return suggestion.includes(aa); // 过滤包含输入文本的提示
             });
