@@ -9,65 +9,69 @@ require_once 'function.php';
 <head>
     <meta charset="UTF-8">
     <!--style是css做修飾-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
-        <?php require_once './css/Account.css'; ?>.mainframe {
-            display: flex;
-            justify-content: center;
-        }
+        <?php
+        require_once './css/main.css';
+        require_once './css/Account.css';
 
-        input {
-            box-shadow: none;
-            border: 1px solid #0066ff;
-            margin: 5px;
-            background-color: rgb(255, 215, 215);
-            font-size: 1.15em;
-            border-radius: 20px;
-            height: 48px;
-            padding-left: 20px;
-            color: #222222;
-            padding-bottom: 2px;
-            font-weight: normal;
-            color: black;
-        }
-
-        .mainframe {
-            border-radius: 20px;
-        }
+        ?>
     </style>
 </head>
 
 <body>
-    <?php if (isset($_COOKIE['is_login']) && $_COOKIE['is_login'] == true) : //如果是已登入狀態，則跳到登入後頁面
-        header('Location: indexTWO.php?are=frontpage'); ?>
-    <?php else :
-        if (isset($_SESSION['msg'])) { //沒有則回到登入頁面
-            echo "<p>" . $_SESSION['msg'] . "</p>";
-        }
-    ?>
+    <?php if (isset($_COOKIE['is_login']) && $_COOKIE['is_login'] == true): //如果是已登入狀態，則跳到登入後頁面
+            header('Location: indexTWO.php?are=frontpage'); ?>
+    <?php else:
+            if (isset($_SESSION['msg'])) { //沒有則回到登入頁面
+                echo "<p>" . $_SESSION['msg'] . "</p>";
+            }
+            ?>
 
         <div calss="mainframe">
-            <form  method="post"><!--已post法送出並導向登入處理-->
-                <label for="username">帳號:</label>
-                <!--設定post陣列名稱-->
-                <input id="account" type="text" value="" placeholder="輸入帳號" ><br>
+            <div class="topcontainer">
+                <a href="indexAcount.php">OHIMEOPP素材網</a>
+            </div>
+            <div class="container1">
+                <div class="logintitle">OHIMEOPP素材網</div>
+                <div class="login">
+                    <form method="post" id="login"><!--已post法送出並導向登入處理-->
+                        <!--設定post陣列名稱-->
+                        <input id="account" type="text" value="" placeholder="輸入帳號" required='required'>
+                        <div class="tab"></div>
+                        <div class="passwordzone">
+                            <input id="password" type="password" value="" placeholder="輸入密碼" required='required'><br>
+                            <a href="#">
+                                <i class="material-icons" id="material-icons" onclick="swdisplay('password')">visibility_off</i>
+                            </a>
+                        </div>
+                        <input type="submit" value="登入" class="submit" onclick="xhraccount()">
+                        <div class="switch-register">
+                            還沒有帳號嗎?<a onclick="swdisplay('signzone')">註冊帳號</a>
+                        </div>
+                    </form>
+                    <!-- <form action='<?php echo $loginURL; ?>' method="post">
+                        <input type="text" name="NAME">
+                        <button type="submit">搜尋密碼</button>
 
-                <label>密碼:</label>
-                <input id="password" style="box-shadow: none; border: 1px solid #0065fd; background-color: rgb(255, 218, 218); font-size: 1.15em;border-radius: 20px; height: 48px; padding-left: 20px; color: #222222; padding-bottom: 2px; font-weight: normal; color: black;" type="passwor" value="" placeholder="輸入密碼"  required='required'><br><br>
+                    </form> -->
 
-                
-            </form><button onclick="xhraccount()">按下</button>
-            <form action='<?php echo $loginURL; ?>' method="post">
-                <input type="text" name="NAME">
-                <button type="submit">搜尋密碼</button>
+                </div>
+                <div>
 
-            </form>
-            <form action='<?php echo $loginURL; ?>' method="post">
-                <label>增加帳號</label>
-                <input type="text" name="increaseaccount" id="account"><br>
-                <label>增加密碼</label>
-                <input type="text " name="increasepassword" id="password">
-                <button type="submit">增加</button>
-            </form>
+
+                    <form action='<?php echo $loginURL; ?>' method="post" id="signzone" style="display:none">
+                        <div class="switch-login">
+                            <a onclick="swdisplay('signzone')" style="cursor: pointer">返回登入</a>
+                        </div>
+                        <input type="text" name="increaseaccount" id="account" placeholder="輸入帳號">
+                        <div class="tab"></div>
+                        <input type="text " name="increasepassword" id="password" placeholder="輸入密碼">
+                        <div class="tab"></div>
+                        <button type="submit">增加</button>
+                    </form>
+                </div>
+            </div>
         </div>
     <?php endif; ?>
 </body>
@@ -79,22 +83,53 @@ require_once 'function.php';
         const account = document.getElementById("account");
         const password = document.getElementById("password");
 
-        
+
 
         var xhr = new XMLHttpRequest();
-        var data = "account="+account.value+"&"+"password="+password.value;
+        var data = "account=" + account.value + "&" + "password=" + password.value;
         xhr.open("post", "index.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 // document.getElementById("txtHint").innerHTML = this.responseText;
                 location.reload();
-            } 
+            }
         }
-        
-        
+
+
         xhr.send(data);
         // xhr.send("account="+ account.value +"&" + "password=");
+    }
+    function swdisplay(item) {
+        const password = document.getElementById("password");
+        const signzon = document.getElementById("signzone");
+        const loginzon = document.getElementById("login");
+        const material_icons = document.getElementById("material-icons");
+        switch (item) {
+            case "password":
+                if (password.type == "password") {
+                    password.type = "text";
+                    material_icons.textContent = "visibility";
+                }
+
+                else {
+                    password.type = "password";
+                    material_icons.textContent = "visibility_off";
+                }
+                break;
+            case "signzone":
+                if (signzon.style.display == "none") {
+                    loginzon.style.display = "none";
+                    signzon.style.display = "block";
+                }
+                // console.log(signzon);
+                else {
+                    signzon.style.display = "none";
+                    loginzon.style.display = "block";
+                }
+                break;
+        }
+
     }
 </script>
 <?php

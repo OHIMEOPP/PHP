@@ -1,6 +1,3 @@
-<style>
-    <?php require_once './css/uploadare.css' ?>
-</style>
 <?php
 require_once 'uploadtoBD.php';
 $title = '上傳區';
@@ -26,6 +23,7 @@ $tag_type = json_encode($tag_type);
 
 ?>
 <style>
+    <?php require_once './css/uploadare.css' ?>
     <?php require_once './css/switchBt.css' ?>
 </style>
 <div class="upload_are">
@@ -34,12 +32,17 @@ $tag_type = json_encode($tag_type);
             <div class="_img">
                 <img src="" id="img_are_IMG">
             </div>
+
             <form method="POST" enctype="multipart/form-data">
                 <div class="up_tag">
                     <div class="img_are_input">
                         <input id="cl" onclick="chagebutton()" placeholder="" style=display:none>
-                        <label for="cl">🔄</label>
-                        <input type="file" id="img_are_input" accept="image/*" name="uploadimg[]" multiple>
+                        <label for="cl"><i class="material-icons" style="cursor:pointer">change_circle</i></label>
+                        <label class="btn btn-info" id="img_are_input">
+                            <input type="file" id="_img_are_input" accept="image/*" name="uploadimg[]"
+                                style="display:none;" multiple>
+                            <i class="fa fa-photo"></i> 上傳圖片
+                        </label>
                         <input type="text" id="img_are_input_text" name="uploadimg" style="display:none"
                             placeholder="輸入圖片位址(非網址)">
                     </div>
@@ -59,6 +62,8 @@ $tag_type = json_encode($tag_type);
                     </div>
                     <p>圖源(source)</p>
                     <div class="source_zone">
+                        <div id="demo" class="collapse">
+                        </div>
                         <div style="display:flex;">
                             <textarea id="source_textare" type="text" name="source" placeholder="source"
                                 autocomplete="off"></textarea>
@@ -75,10 +80,9 @@ $tag_type = json_encode($tag_type);
                         <div class="another_tag">
                             <div style="display:flex;">
                                 <textarea contenteditable="true" dropzone="copy" id="textare" type="text"
-                                    name="another_tag" placeholder="金髮,黑絲,藍瞳,.....(以豆號分隔)"
+                                    name="another_tag" placeholder="金髮,黑絲,藍瞳,.....(以半形豆號分隔)"
                                     autocomplete="off"></textarea>
-                                <div id="demo" class="collapse">
-                                </div>
+
                             </div>
                             <div class="relate_tags">
                                 <a href="#" onclick="closeare('c_main','main_tag')" id="c_main" data-toggle="collapse"
@@ -89,10 +93,15 @@ $tag_type = json_encode($tag_type);
                                     data-toggle="collapse" data-target="#demo">作者</a>
                                 <a href="#" onclick="closeare('c_another','textare')" id="c_another"
                                     data-toggle="collapse" data-target="#demo">其他</a>
+                                <label class="btn btn-info" id="img_are_input">
+                                    <button type="submit" id="upload_bt" 
+                                        style="display:none;"></button><i class="fa fa-photo"></i> 上傳
+                                </label>
                                 <!-- <a onclick="closeare()" id="c_secondary" data-toggle="collapse" data-target="#demo">團體標籤</a> -->
                             </div>
                         </div>
-                        <button type="submit" onclick="uoload_willingness()">上傳</button>
+
+
                     </div>
                 </div>
             </form>
@@ -106,7 +115,7 @@ $tag_type = json_encode($tag_type);
 
     function uploads() {
         //顯示上傳圖片
-        var filename = document.getElementById("img_are_input");
+        var filename = document.getElementById("_img_are_input");
         var img = document.getElementById("img_are_IMG");
         // var img1 = document.getElementById("img");
         filename.onchange = function () {
@@ -141,7 +150,6 @@ $tag_type = json_encode($tag_type);
 
     function closeare(e, I_id) {
         var c_div = document.getElementById("demo");
-        var cv = I_id;
         const searchInput = document.getElementById(I_id);
         const suggestionsDiv = document.getElementById('demo');
         var suggestions = [];
@@ -156,11 +164,6 @@ $tag_type = json_encode($tag_type);
                 var lastPartOfString = arrayAfterComma[arrayAfterComma.length - 1];
                 var aa = lastPartOfString; // 這將會印出逗號後的字串
             }
-
-            // suggestions = suggestions.filter(function (suggestion) {
-            //     return suggestion.includes(aa); // 过滤包含输入文本的提示
-
-            // });
             const filteredSuggestions = suggestions.filter(function (suggestion) {
                 return suggestion.includes(aa); // 过滤包含输入文本的提示
             });
@@ -226,7 +229,6 @@ $tag_type = json_encode($tag_type);
         });
         document.getElementById('source_textare').addEventListener('input', function () {
             if (document.getElementById('source_textare').value.trim() != '') {
-                console.log('空')
             }
         });
 

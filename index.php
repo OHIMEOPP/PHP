@@ -20,8 +20,6 @@ function login()
     $searchPassword = $_POST["password"]; // 要尋找的值
 
     $sel = $link->prepare("SELECT * FROM `user_account` WHERE `account`=? && `password`=?");
-    $sel->bindParam(1, $searchAccount, PDO::PARAM_STR, 30);
-    $sel->bindParam(2, $searchPassword, PDO::PARAM_STR, 30);
 
     $sel->execute([$searchAccount, $searchPassword]);
 
@@ -77,14 +75,25 @@ function signUp()
     $increaseAccount = $_POST['increaseaccount'];
     $increasePassword = $_POST['increasepassword'];
     if (strlen($increaseAccount) >= 5 && strlen($increasePassword) >= 5) {
-        $sel = "INSERT INTO `user_account`(`account`, `password`, `name`) VALUES ('$increaseAccount','$increasePassword','jack')";
-        $querySel = $link->query($sel);
+        $sel = "INSERT INTO `user_account`(`account`, `password`, `name`) VALUES (:increaseAccount,:increasePassword,'jack')";
+        $sel = $link -> prepare($sel);
+        $sel -> execute([
+            'increaseAccount' => $increaseAccount,
+            'increasePassword' => $increasePassword
+        ]);
+        // $querySel = $link->query($sel);
         $new_user_id = queryAccount()['id'];
         // echo $_SESSION['msg'] = "asd";
         foreach ($check_img_type as $r) {
             $sel = "INSERT INTO `img_data`(`img_path`, `upload_date`, `creat_user_id`, `check_img_type`) 
-            VALUES ('KV_smoke_2880.dd9c01d6.png','$time','$new_user_id','$r')";
-            $querySel = $link->query($sel);
+            VALUES ('KV_smoke_2880.dd9c01d6.png',:time,:new_user_id,:r)";
+            $sel = $link -> prepare($sel);
+            $sel -> execute([
+                'time' => $time,
+                'new_user_id' => $new_user_id,
+                'r' => $r
+            ]);
+            // $querySel = $link->query($sel);
             echo $_SESSION['msg'] = "創建成功";
         }
         header("Location: $loginpage");

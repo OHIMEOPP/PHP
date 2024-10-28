@@ -18,6 +18,15 @@ $imgstatus = $singleimgdata->ispublic;
 $check_img_type = $singleimgdata->check_img_type;
 $source = $singleimgdata->source;
 
+$_mainTag = $mainTag;
+$mainTag = explode(',', $_mainTag);
+
+$_secondaryTag = $secondaryTag;
+$secondaryTag = explode(',', $_secondaryTag);
+
+$_ArtistTag = $ArtistTag;
+$ArtistTag = explode(',', $_ArtistTag);
+
 $_anotherTag = $anotherTag;
 $anotherTag = explode(',', $_anotherTag);
 
@@ -66,10 +75,10 @@ $url = "https://zh.moegirl.org.cn/";
             </label>
             <p id="status">狀態: <?php echo $imgstatus ?></p>
         </div>
-        <div>人物<input type="text" name="set_maintag" id="set_maintag" value="<?php echo $mainTag ?>"></div>
-        <div>團體<input type="text" name="set_secondarytag" id="set_secondarytag" value="<?php echo $secondaryTag ?>">
+        <div>人物<input type="text" name="set_maintag" id="set_maintag" value="<?php echo $_mainTag ?>"></div>
+        <div>團體<input type="text" name="set_secondarytag" id="set_secondarytag" value="<?php echo $_secondaryTag ?>">
         </div>
-        <div>作者<input type="text" name="set_artisttag" id="set_artisttag" value="<?php echo $ArtistTag ?>"></div>
+        <div>作者<input type="text" name="set_artisttag" id="set_artisttag" value="<?php echo $_ArtistTag ?>"></div>
         <div>圖源<input type="text" name="set_source" id="set_source" value="<?php echo $source ?>"></div>
         <div>其他<textarea type="text" name="set_anothertag" id="set_anothertag"
                 value=""><?php echo $_anotherTag ?></textarea></div>
@@ -99,68 +108,80 @@ $url = "https://zh.moegirl.org.cn/";
 
         <h4> 人物</h4>
         <div>
+        <?php foreach ($mainTag as $v): ?>
+            <div>
             <li>
-                <a href="indexTWO.php?tag=<?php echo $mainTag ?>&&page=1">
+                <a href="indexTWO.php?tag=<?php echo $v ?>&&page=1">
                     <?php
-                    echo $mainTag;
+                    echo $v;
                     ?>
                 </a>
                 <a href="#">
                     <?php
-                    echo countmysql($mainTag, 'mainTag', 'single');
+                    echo countmysql($v, 'mainTag', 'single');
                     ?>
                 </a>
                 <a href="#">
                     <?php
-                    echo countmysql($mainTag, 'mainTag', 'group');
+                    echo countmysql($v, 'mainTag', 'group');
                     ?>
                 </a>
-                <?php if ($mainTag): ?><a href="#"
-                        onclick="window.open('<?php echo $url . $mainTag ?>','_blank')">🔍</a><?php endif; ?>
+                <?php if ($v): ?><a href="#"
+                        onclick="window.open('<?php echo $url . $v ?>','_blank')">🔍</a><?php endif; ?>
 
             </li>
+            </div>
+            <?php endforeach; ?>
         </div>
         <hr align="left">
         <h4>團體</h4>
         <div>
+        <?php foreach ($secondaryTag as $v): ?>
+            <div>
             <li>
-                <a href="indexTWO.php?tag=<?php echo $secondaryTag ?>&&page=1">
+                <a href="indexTWO.php?tag=<?php echo $v ?>&&page=1">
                     <?php
-                    echo $secondaryTag;
+                    echo $v;
                     ?>
                 </a>
                 <a href="#">
                     <?php
-                    echo countmysql($secondaryTag, 'secondaryTag', 'single');
+                    echo countmysql($v, 'secondaryTag', 'single');
                     ?>
                 </a>
                 <a href="#">
                     <?php
-                    echo countmysql($secondaryTag, 'secondaryTag', 'group');
+                    echo countmysql($v, 'secondaryTag', 'group');
                     ?>
                 </a>
             </li>
+            </div>
+            <?php endforeach; ?>
         </div>
         <hr align="left">
         <h4>作者</h4>
         <div>
+        <?php foreach ($ArtistTag as $v): ?>
+            <div>
             <li>
-                <a href="indexTWO.php?tag=<?php echo $ArtistTag ?>&&page=1">
+                <a href="indexTWO.php?tag=<?php echo $v ?>&&page=1">
                     <?php
-                    echo $ArtistTag;
+                    echo $v;
                     ?>
                 </a>
                 <a href="#">
                     <?php
-                    echo countmysql($ArtistTag, 'ArtistTag', 'single');
+                    echo countmysql($v, 'ArtistTag', 'single');
                     ?>
                 </a>
                 <a href="#">
                     <?php
-                    echo countmysql($ArtistTag, 'ArtistTag', 'group');
+                    echo countmysql($v, 'ArtistTag', 'group');
                     ?>
                 </a>
             </li>
+            </div>
+            <?php endforeach; ?>
         </div>
         <hr align="left">
         <h4>其他</h4>
@@ -173,12 +194,12 @@ $url = "https://zh.moegirl.org.cn/";
                         </a>
                         <a href="#">
                             <?php
-                            echo tag_img_quantity($v, 'single');
+                            echo countmysql($v,'anotherTag', 'single');
                             ?>
                         </a>
                         <a href="#">
                             <?php
-                            echo tag_img_quantity($v, 'group');
+                            echo countmysql($v,'anotherTag', 'group');
                             ?>
                         </a>
                     </li>

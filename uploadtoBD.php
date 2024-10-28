@@ -61,9 +61,21 @@ if (isset($_FILES['uploadimg']['name']) && $_FILES['uploadimg']['name'] != '' ||
                 }
             }
             if ($check == false) :
-                $sel = "INSERT INTO `img_data`(`img_path`, `upload_date`, `mainTag`, `secondaryTag`, `ArtistTag`, `anotherTag`, `creat_user_id`, `check_img_type`,`ispublic`,`source`) VALUES
-            ('$uploadimg','$time','$main_tag','$second_tag','$artist_tag','$another_tag','$user_id','$type','$img_status','$source')";
-                $link->query($sel);
+                $sel = "INSERT INTO img_data (img_path, upload_date, mainTag, secondaryTag, ArtistTag, anotherTag, creat_user_id, check_img_type, ispublic, source) 
+            VALUES (:uploadimg, :time, :main_tag, :second_tag, :artist_tag, :another_tag, :user_id, :type, :img_status, :source)";
+                $sel = $link->prepare($sel);
+                $sel->execute([
+                    ':uploadimg'   => $uploadimg,
+                    ':time'        => $time,
+                    ':main_tag'    => $main_tag,
+                    ':second_tag'  => $second_tag,
+                    ':artist_tag'  => $artist_tag,
+                    ':another_tag' => $another_tag,
+                    ':user_id'     => $user_id,
+                    ':type'        => $type,
+                    ':img_status'  => $img_status,
+                    ':source'      => $source
+                ]);
                 echo $source;
                 $check = true;
                 $another_tag_array = explode(",", $another_tag);
