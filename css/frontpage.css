@@ -46,6 +46,7 @@
     justify-content: center;
 }
 
+
 .warning {
     /* position: absolute; */
     /* top: 40px; left: 25%; */
@@ -58,7 +59,7 @@
     /* position: relative; */
     /* justify-content: center; */
     /* 邊框 */
-    border: groove 5px rgb(204, 229, 255);
+    border: solid 2px rgb(130, 172, 217);
     /* border-image-source: url('./uploadimg/GNbWXMObAAAJn0o.jpg');   */
     /* 背景颜色 */
     background-color: rgba(50, 255, 80, 0.5);
@@ -172,7 +173,7 @@
 
 .co1-1,
 .co1-2 {
-    border: groove 5px rgba(204, 229, 255);
+    border: solid 2px rgb(130, 172, 217);
     background-color: rgba(232, 232, 232, 0.8);
     margin-top: 10px;
     padding: 10px;

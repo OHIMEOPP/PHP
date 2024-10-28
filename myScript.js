@@ -53,7 +53,6 @@ function _dynamictagtype(searchInput, tag_type) {
     if (tag_type) {
         taggroupline.textContent = "";
         tag_type.forEach(function (type) {
-            console.log(type);
             const a = document.createElement("p");
             // a.href = "#";
             //當按下a時傳送post
@@ -103,14 +102,6 @@ function f_w_dynamictagtype(tag_type) {
                     
                     taggroupline.appendChild(p);
                     taggroupline.innerHTML += this.responseText;
-                    // const oo = document.querySelectorAll(".revise_tag_checktag a");
-                    // // console.log(oo);
-                    // oo.forEach(o=>{
-                    //     // console.log(o);
-                    //     o.onclick = function(){
-                    //         openedit(this.value)
-                    //     }
-                    // })
                     
                 }
             };
