@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Image Download</title>
+</head>
+<body>
+    <img id="image" src="https://example.com/path-to-your-image.jpg" alt="Example Image" style="width:300px;">
+    <button id="downloadBtn">Download Image</button>
+    <div></div>
+=======
 <div class="container">
   <!-- 左邊區域，放置五個標籤 -->
   <div id="left-box" class="box">
@@ -7,6 +20,7 @@
     <div class="label" onclick="moveLabel(this, 'right')">Label 4</div>
     <div class="label" onclick="moveLabel(this, 'right')">Label 5</div>
   </div>
+>>>>>>> 974b282c52aa4b1277bd5c7cdd98f10046152f4f
 
   <!-- 右邊區域，接收移動的標籤 -->
   <div id="right-box" class="box">
