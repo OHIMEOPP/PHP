@@ -6,7 +6,7 @@ $dbName = "test_parking_sql"; // PostgreSQL 數據庫名稱
 $port = "5432"; // PostgreSQL 默認端口號
 $chrs = "utf8"; // 字符集設置為 UTF-8
 $attr = "pgsql:host=$host;port=$port;dbname=$dbName;options='--client_encoding=$chrs'";
-
+echo 123;
 try {
     // 創建 PDO 連接
     $link = new PDO($attr, $userAccount, $userPassword);
