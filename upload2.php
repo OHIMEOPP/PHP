@@ -8,6 +8,7 @@
 <body>
     <img id="image" src="https://example.com/path-to-your-image.jpg" alt="Example Image" style="width:300px;">
     <button id="downloadBtn">Download Image</button>
+    <div></div>
 
     <script>
         document.getElementById("downloadBtn").addEventListener("click", function () {

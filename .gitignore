@@ -2,3 +2,5 @@
 Dockerfile
 mysql_data
 
+/config/
+/config2/
