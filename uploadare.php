@@ -48,7 +48,7 @@ $tag_type = json_encode($tag_type);
                     </div>
                     <div class="input_tag">
                         <div class="main_tag">
-                            <p>人物(main Tag)</p>
+                            <p>人物 (main Tag )</p>
                             <input type="text" name="main_tag" autocomplete="off" id="main_tag">
                         </div>
                         <div class="second_tag">
@@ -94,8 +94,8 @@ $tag_type = json_encode($tag_type);
                                 <a href="#" onclick="closeare('c_another','textare')" id="c_another"
                                     data-toggle="collapse" data-target="#demo">其他</a>
                                 <label class="btn btn-info" id="img_are_input">
-                                    <button type="submit" id="upload_bt" 
-                                        style="display:none;"></button><i class="fa fa-photo"></i> 上傳
+                                    <button type="submit" id="upload_bt" style="display:none;"></button><i
+                                        class="fa fa-photo"></i> 上傳
                                 </label>
                                 <!-- <a onclick="closeare()" id="c_secondary" data-toggle="collapse" data-target="#demo">團體標籤</a> -->
                             </div>

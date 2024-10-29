@@ -63,7 +63,11 @@
 }
 .input_tag{
     display:flex;
+    flex-wrap: wrap;
     align-content: center;
+}
+.input_tag input{
+    margin: 5px;
 }
 
 .main_tag{
