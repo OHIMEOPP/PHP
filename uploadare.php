@@ -62,45 +62,50 @@ $tag_type = json_encode($tag_type);
                     </div>
                     <p>圖源(source)</p>
                     <div class="source_zone">
-                        <div id="demo" class="collapse">
-                        </div>
-                        <div style="display:flex;">
-                            <textarea id="source_textare" type="text" name="source" placeholder="source"
-                                autocomplete="off"></textarea>
-                        </div>
-                        <div style="display: flex;">
-                            <p>圖片狀態(status)</p>
-                            <label class="switch">
-                                <input type="checkbox" id="toggleSwitch" name="img_status">
-                                <span class="slider round"></span>
-                            </label>
-                            <p id="status">狀態: 公開</p>
-                        </div>
-                        <p>其他標籤(another Tag)</p>
-                        <div class="another_tag">
+                        <div>
                             <div style="display:flex;">
-                                <textarea contenteditable="true" dropzone="copy" id="textare" type="text"
-                                    name="another_tag" placeholder="金髮,黑絲,藍瞳,.....(以半形豆號分隔)"
+                                <textarea id="source_textare" type="text" name="source" placeholder="source"
                                     autocomplete="off"></textarea>
-
                             </div>
-                            <div class="relate_tags">
-                                <a href="#" onclick="closeare('c_main','main_tag')" id="c_main" data-toggle="collapse"
-                                    data-target="#demo">人物</a>
-                                <a href="#" onclick="closeare('c_secondary','second_tag')" id="c_secondary"
-                                    data-toggle="collapse" data-target="#demo">團體</a>
-                                <a href="#" onclick="closeare('c_artist','artist_tag')" id="c_artist"
-                                    data-toggle="collapse" data-target="#demo">作者</a>
-                                <a href="#" onclick="closeare('c_another','textare')" id="c_another"
-                                    data-toggle="collapse" data-target="#demo">其他</a>
-                                <label class="btn btn-info" id="img_are_input">
-                                    <button type="submit" id="upload_bt" style="display:none;"></button><i
-                                        class="fa fa-photo"></i> 上傳
+                            <div style="display: flex;">
+                                <p>圖片狀態(status)</p>
+                                <label class="switch">
+                                    <input type="checkbox" id="toggleSwitch" name="img_status">
+                                    <span class="slider round"></span>
                                 </label>
-                                <!-- <a onclick="closeare()" id="c_secondary" data-toggle="collapse" data-target="#demo">團體標籤</a> -->
+                                <p id="status">狀態: 公開</p>
+                            </div>
+                            <p>其他標籤(another Tag)</p>
+                            <div class="another_tag">
+                                <div style="display:flex;">
+                                    <textarea contenteditable="true" dropzone="copy" id="textare" type="text"
+                                        name="another_tag" placeholder="金髮,黑絲,藍瞳,.....(以半形豆號分隔)"
+                                        autocomplete="off"></textarea>
+
+                                </div>
+                                <div class="relate_tags">
+                                    <div>
+                                    <a href="#" onclick="closeare('c_main','main_tag')" id="c_main"
+                                        data-toggle="collapse" data-target="#demo">人物</a>
+                                    <a href="#" onclick="closeare('c_secondary','second_tag')" id="c_secondary"
+                                        data-toggle="collapse" data-target="#demo">團體</a>
+                                    <a href="#" onclick="closeare('c_artist','artist_tag')" id="c_artist"
+                                        data-toggle="collapse" data-target="#demo">作者</a>
+                                    <a href="#" onclick="closeare('c_another','textare')" id="c_another"
+                                        data-toggle="collapse" data-target="#demo">其他</a>
+                                    </div>
+                                    <label class="btn btn-info" id="img_are_input">
+                                        <button type="submit" id="upload_bt" style="display:none;"></button><i
+                                            class="fa fa-photo"></i> 上傳
+                                    </label>
+                                    <!-- <a onclick="closeare()" id="c_secondary" data-toggle="collapse" data-target="#demo">團體標籤</a> -->
+                                </div>
                             </div>
                         </div>
-
+                        <div  style ="margin-left: 50px">
+                            <div id="demo" class="collapse">
+                            </div>
+                        </div>
 
                     </div>
                 </div>
