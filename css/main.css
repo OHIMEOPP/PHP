@@ -37,6 +37,22 @@ a:hover {
     color: white;
     /* background-color: rgb(99, 99, 99); */
 }
+::-webkit-scrollbar{
+    width: 15px;
+    height: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #9287d3; /* 調整滑塊顏色 */
+    border-radius: 4px;     /* 圓角效果 */
+    border: 2px solid #f1f1f1; /* 外邊框顏色 */
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* 滑塊在滑動時變深 */
+}
+::-webkit-scrollbar-track {
+    background: #bbd0ea;    /* 滑動條的背景顏色 */
+    border-radius: 6px;
+}
 
 .float_window {
     background-color: rgba(96, 96, 96, 0.6);
