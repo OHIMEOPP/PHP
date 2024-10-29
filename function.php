@@ -14,25 +14,7 @@ function mysql_fix_string($pdo, $string)
 function select($sel)
 {
     global $link;
-    //查詢成功時給qurrySel值為true，否為false
-    // $querySel = mysqli_query($link, $sel);
-    // //如果有查到
-    // if ($querySel) {
-    //     //如果querySel的資料大於0
-    //     if (mysqli_num_rows($querySel) > 0) {
-    //         //在querySelc還有列時，將資料傳給$data
-    //         while ($row = mysqli_fetch_assoc($querySel)) {
-    //             $data[] = $row;
-    //         }
-    //         return $data;
-    //     }
-    //     mysqli_free_result($querySel);
-    // } else {
-    //     echo "{$sel}無法查詢" . mysqli_error($link);
-    // }
-    // mysqli_free_result($querySel);
     $data = $link->query($sel);
-    // mysqli_free_result($querySel);
     return $data;
 }
 function _select($sel)
@@ -113,6 +95,28 @@ function queryimgids($sel)
         return $user;
     }
 }
+function queryimgids2($sel)
+{
+    // $data = _select($sel);
+    if (isset($data)) {
+        while ($v = $data->fetch(PDO::FETCH_ASSOC)) {
+            $user[] = array(
+                'id' => $v['id'],
+                'img_path' => $v['img_path'],
+                'check_img_type' => $v['check_img_type'],
+                'mainTag' => $v['mainTag'],
+                'creat_user_id' => $v['creat_user_id'],
+                'secondaryTag' => $v['secondaryTag'],
+                'ArtistTag' => $v['ArtistTag'],
+                'anotherTag' => $v['anotherTag'],
+                'upload_date' => $v['upload_date'],
+                'ispublic' => $v['ispublic'],
+                'source' => $v['source']
+            );
+        }
+        return $user;
+    }
+}
 function querytagids($sel)
 {
     $data = select($sel);
@@ -165,10 +169,6 @@ function current_img($sel, $data_c)
 }
 function imgdisplay($user, $G_tag)
 {
-    // global $user_id;
-    // $wsel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id}";
-
-    // $user = (queryimgids($wsel));
     $m_page = $_GET['page'] - 1;
     $p_page = $_GET['page'] + 1;
     $per = 15; //每頁顯示項目數量30
@@ -360,14 +360,20 @@ function countmysql($tag, $tagType, $status)
     global $link;
     global $user_id;
     if ($status == 'single')
-        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` LIKE '%$tag%' && `creat_user_id` = $user_id ";
+        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` LIKE :tag && `creat_user_id` = $user_id ";
     else {
-        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` LIKE '%$tag%' &&  `ispublic` = 'public' ";
+        $sql = "SELECT COUNT(*) FROM `img_data` WHERE `$tagType` LIKE :tag &&  `ispublic` = 'public' ";
     }
     $stmt = $link->prepare($sql);
-    $stmt->execute();
+    $stmt->execute([
+        ':tag' =>'%' . $tag . '%',
+    ]);
     $cc = $stmt->fetchColumn();
 
     if (!empty($tag))
         return $cc;
+}
+function escape_mysql_string($array){
+    global $link;
+
 }

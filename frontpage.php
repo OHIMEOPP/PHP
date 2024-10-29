@@ -37,6 +37,7 @@ if (!empty(current_tag("type", $sel))) {
 
 function typechose($dbname, $s_tagtype, $user_id)
 {
+    global $link;
     switch ($dbname) {
         case 'tag_data':
             $sel = "SELECT * FROM `$dbname`  WHERE `creat_user_id` = {$user_id} && `type` = '$s_tagtype'";
