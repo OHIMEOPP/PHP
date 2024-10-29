@@ -14,6 +14,10 @@
     max-width: 80%;
     padding: 20px;
 }
+.contentblock{
+        display: flex;
+        flex-wrap: wrap;
+    }
 select{
     background-color: rgba(189, 196, 239, 0.9);
     margin-bottom: 5px;
@@ -30,10 +34,7 @@ option{
     font-weight:900;
     font-size: 15px;
 }
-.contentblock{
-    /* display:; 
-    justify-content: center; */
-}
+
 .incontent{
    display: flex; 
    justify-content: center;
@@ -43,7 +44,7 @@ option:hover {
     color:none;
 }
 .out{
-    display:inline-flex;
+    margin: 2px;
 }
 .img_frame {
     display:flex;
