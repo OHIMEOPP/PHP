@@ -10,7 +10,7 @@
     <img id="image" src="https://example.com/path-to-your-image.jpg" alt="Example Image" style="width:300px;">
     <button id="downloadBtn">Download Image</button>
     <div></div>
-=======
+<!-- ======= -->
 <div class="container">
   <!-- 左邊區域，放置五個標籤 -->
   <div id="left-box" class="box">

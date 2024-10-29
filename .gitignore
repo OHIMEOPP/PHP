@@ -1,6 +1,8 @@
 *.yml
 Dockerfile
 mysql_data
+upload.php
+upload2.php
 
 /config/
 /config2/
