@@ -171,7 +171,7 @@ function imgdisplay($user, $G_tag)
 {
     $m_page = $_GET['page'] - 1;
     $p_page = $_GET['page'] + 1;
-    $per = 15; //每頁顯示項目數量30
+    $per = 16; //每頁顯示項目數量30
     $pages = ceil(count($user) / $per);
     $pages_end = count($user) % $per;
     if (!isset($_GET["page"])) { //假如$_GET["page"]未設置
