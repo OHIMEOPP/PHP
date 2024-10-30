@@ -19,16 +19,16 @@ $check_img_type = $singleimgdata->check_img_type;
 $source = $singleimgdata->source;
 
 $_mainTag = $mainTag;
-$mainTag = explode(',', $_mainTag);
+$mainTag = explode(',', is_string($_mainTag) ? $_mainTag : "");
 
 $_secondaryTag = $secondaryTag;
-$secondaryTag = explode(',', $_secondaryTag);
+$secondaryTag = explode(',', is_string($_secondaryTag) ? $_secondaryTag : "");
 
 $_ArtistTag = $ArtistTag;
-$ArtistTag = explode(',', $_ArtistTag);
+$ArtistTag = explode(',', is_string($_ArtistTag) ? $_ArtistTag : "");
 
 $_anotherTag = $anotherTag;
-$anotherTag = explode(',', $_anotherTag);
+$anotherTag = explode(',', is_string($_anotherTag) ? $_anotherTag : "");
 
 $_sel = "SELECT * FROM `img_data` WHERE `creat_user_id`='$user_id'";
 
