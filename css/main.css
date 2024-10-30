@@ -220,7 +220,7 @@ input:focus {
 
 .tag_search-button button {
     /* width:300px; */
-    background-color: rgba(182, 162, 237, 0.5);
+    background-color: unset;
     border: 1px rgba(204, 209, 245, 1) ridge;
     border-radius: 0px 20px 20px 0px;
     border: 0px;
