@@ -19,8 +19,8 @@ if (isset($_GET['tag'])) {
     }
     echo $inputtagCut;
     //如果有選擇排序 傳入排序keyword與使用者id 沒則使用預設
-    if (isset($_POST['select_sort'])) {
-        $sel = selectsort($_POST['select_sort'], $user_id, $inputtag);
+    if (isset($_POST['select_sort']) ) {
+        $sel = selectsort($_POST['select_sort'], $user_id, $inputtag, $_POST['sortDES']);
         // $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id} && `anotherTag` LIKE '%$inputtag%' order by `id`;";
     } else {
         $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id}";
@@ -31,8 +31,8 @@ if (isset($_GET['tag'])) {
 //----------------
 $sel = "SELECT * FROM `img_data`  WHERE `creat_user_id` = {$user_id}";
 
-if (isset($_POST['select_sort'])) {
-    $sel = selectsort($_POST['select_sort'], $user_id, null);
+if (isset($_POST['select_sort']) && isset($_POST['sortDES'])) {
+    $sel = selectsort($_POST['select_sort'], $user_id, null, $_POST['sortDES']);
 }
 
 echo "<div class='content' id='content'>";

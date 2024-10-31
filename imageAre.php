@@ -3,10 +3,9 @@ require_once 'function.php';
 ?>
 <div class="imgAre_out">
     <div class="imgAre">
-        <div>
+        <div class="select_sort_area">
             <form method="post" id="from_s">
-                <select name="select_sort" id="select_sort" onchange="showsortimg(this.value)">
-
+                <select name="select_sort" id="select_sort" onchange="showsortimg(this.value, null)">
                     <option value="上傳日期">上傳日期</option>
                     <option value="ID">ID</option>
                     <option value="圖片名稱">圖片名稱</option>
@@ -20,11 +19,11 @@ require_once 'function.php';
                     <option value="其他標籤未修改">其他標籤未修改</option>
                 </select>
             </form>
-            <a href="#">圖片名稱</a>
-
-
-            <div id="timeblock">
-            </div>
+            <label class="sort_desc">
+                <input type="button" id="sort_desc" onclick="showsortimg(null, this.value)" value="desc"
+                    style="display:none">
+                <i class="material-icons" id="arrow">arrow_upward </i>
+            </label>
         </div>
         <?php
         echo "<div class='content' id='content'>";
@@ -39,27 +38,12 @@ require_once 'function.php';
 <script>
     current_select();
 
-    // select_sort.addEventListener('change', function(e) {
-    //     document.getElementById("from_s").submit();
-    // });
-
-    function carousel1() {
-        var timeblock = document.getElementById("timeblock");
-        document.getElementById("timeblock").innerText = "<?php echo currentTime() ?>";
-        console.log('<?php echo currentTime() ?>')
-    }
-    var timer = setInterval(carousel1, 1000);
-
     function current_select() {
         const selectElement = document.getElementById('select_sort');
 
-        // 在用户选择选项时保存选中值到本地存储
-        selectElement.addEventListener('change', function(event) {
-            localStorage.setItem('selectedOption', event.target.value);
-        });
 
         // 在页面加载时检查本地存储并设置选中项
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const selectedOption = localStorage.getItem('selectedOption');
             if ("排序:" + selectedOption != (selectElement.value)) {
                 selectElement.value = selectedOption;
@@ -68,10 +52,39 @@ require_once 'function.php';
         });
     }
 
-    function showsortimg(str) {
+    function showsortimg(str, sortDES) {
+        const selectElement = document.getElementById('select_sort');
+        const sort_desc = document.getElementById('sort_desc');
+        const arrow =document.getElementById('arrow');
+        // 在用户选择选项时保存选中值到本地存储
+
+
+
+        if (sortDES == null) {
+            selectElement.addEventListener('change', function (event) {
+                localStorage.setItem('selectedOption', event.target.value);
+            });
+            sortDES = localStorage.getItem('sortDES');
+            console.log("sorDES = " + sortDES);
+            console.log("str = " + str);
+        }
+        if (str == null) {
+            str = localStorage.getItem('selectedOption');
+            if (sortDES === 'desc') {
+                sort_desc.value = 'asc';
+                localStorage.setItem('sortDES', sortDES);
+                arrow.textContent = 'arrow_downward';
+            } else {
+                sort_desc.value = 'desc';
+                localStorage.setItem('sortDES', sortDES);
+                arrow.textContent = 'arrow_upward';
+            }
+            console.log("sorDES = " + sortDES);
+            console.log("str = " + str);
+        }
 
         var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
+        xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 var parser = new DOMParser();
                 var doc = parser.parseFromString(this.responseText, 'text/html');
@@ -82,19 +95,19 @@ require_once 'function.php';
 
             }
         }
-        var tag = "<?php echo !empty($_GET['tag']) ? $_GET['tag'] : json_encode(null) ; ?>";//&tag="+ tag
+        var tag = "<?php echo !empty($_GET['tag']) ? $_GET['tag'] : json_encode(null); ?>";//&tag="+ tag
         var pagecontent = "fly.php?page=<?php echo $_GET['page']; ?>";
-        console.log(tag);
-        xmlhttp.open("POST", pagecontent + "&tag="+ tag, true);
-
+        // console.log(tag);
+        xmlhttp.open("POST", pagecontent + "&tag=" + tag, true);
         xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-        xmlhttp.send("select_sort=" + str);
+        xmlhttp.send("select_sort=" + str + "&sortDES=" + sortDES);
         // window.location.href = "indexTWO.php?page=1";
     }
 
+
     function clr_dom() {
         localStorage.getItem('selectedOption') = '';
-        console.log("bff");
+        // console.log("bff");
     }
 </script>

@@ -11,8 +11,12 @@
     display: flex;
     justify-content: center;
     /* width: 80%; */
-    max-width: calc(78vw - 20px);;
+    max-width: calc(80vw - 15px);
     padding: 20px;
+}
+.select_sort_area{
+    /* display: flex; */
+    margin-right: 5px;
 }
 .contentblock{
         display: flex;
@@ -34,7 +38,18 @@ option{
     font-weight:900;
     font-size: 15px;
 }
+#arrow{
+    /* background-color: #a146c5; */
+    font-size: 50px;
+    color: #e2c2ef;
+    background-color: #a146c5;
+    border-radius: 5px;
+}
 
+#arrow:active{
+    transition: font-size 0.2s;
+    font-size: 46px;
+}
 .incontent{
    display: flex; 
    justify-content: center;

@@ -266,8 +266,9 @@ function imgdisplay($user, $G_tag)
         echo " 頁 <a href=?page=" . $pages . ">末頁</a><br /></div>";
     }
 }
-function selectsort($select_sort, $user_id, $inputtag)
+function selectsort($select_sort, $user_id, $inputtag, $sortDES)
 {
+    global $link;
     // $select_sort = $_POST['select_sort'];
     if (empty($inputtag)) {
         switch ($select_sort) {
@@ -278,7 +279,7 @@ function selectsort($select_sort, $user_id, $inputtag)
                 $order = 'order by img_path';
                 break;
             case "上傳日期":
-                $order = 'order by upload_date desc';
+                $order = 'order by upload_date';
                 break;
             case "人物":
                 $order = 'order by mainTag';
@@ -302,14 +303,15 @@ function selectsort($select_sort, $user_id, $inputtag)
                 $order = " && `anothertag` = '' ";
                 break;
         }
-        $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  $order ";
+        $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  $order  $sortDES";
         if ($select_sort == "public")
-            $sel = "SELECT * FROM `img_data`   WHERE `ispublic` = 'public' && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `upload_date` desc  ";
+            $sel = "SELECT * FROM `img_data`   WHERE `ispublic` = 'public' && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage' order by `upload_date` $sortDES  ";
     } else {
         switch ($select_sort) {
             case "ID":
                 $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && (`anotherTag` 
                 LIKE '%$inputtag%' || `mainTag` LIKE '%$inputtag%' || `secondaryTag` LIKE '%$inputtag%' || `ArtistTag` LIKE '%$inputtag%') order by `id`;";
+                
                 break;
             case "圖片名稱":
                 $sel = "SELECT * FROM `img_data` WHERE `creat_user_id` = {$user_id}  && (`anotherTag` 
