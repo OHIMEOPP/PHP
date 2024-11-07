@@ -41,13 +41,12 @@ require_once 'function.php';
     function current_select() {
         const selectElement = document.getElementById('select_sort');
 
-
         // 在页面加载时检查本地存储并设置选中项
         document.addEventListener('DOMContentLoaded', function () {
             const selectedOption = localStorage.getItem('selectedOption');
             if ("排序:" + selectedOption != (selectElement.value)) {
                 selectElement.value = selectedOption;
-                showsortimg(selectElement.value);
+                showsortimg(selectElement.value,localStorage.getItem('sortDES'));
             }
         });
     }
@@ -57,10 +56,11 @@ require_once 'function.php';
         const sort_desc = document.getElementById('sort_desc');
         const arrow =document.getElementById('arrow');
         // 在用户选择选项时保存选中值到本地存储
-
-
+        // const sortDES = localStorage.getItem('sortDES');
+        // const arrow =document.getElementById('arrow');
 
         if (sortDES == null) {
+
             selectElement.addEventListener('change', function (event) {
                 localStorage.setItem('selectedOption', event.target.value);
             });
@@ -82,6 +82,13 @@ require_once 'function.php';
             console.log("sorDES = " + sortDES);
             console.log("str = " + str);
         }
+        if (sortDES === 'desc') {
+                arrow.textContent = 'arrow_downward';
+            } else {
+                arrow.textContent = 'arrow_upward';
+            }
+
+
 
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {

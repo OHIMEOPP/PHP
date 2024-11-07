@@ -291,16 +291,16 @@ function selectsort($select_sort, $user_id, $inputtag, $sortDES)
                 $order = 'order by ArtistTag';
                 break;
             case "人物未修改":
-                $order = " && `mainTag` = '' ";
+                $order = " && `mainTag` = '' order by upload_date ";
                 break;
             case "團體未修改":
-                $order = " && `secondaryTag` = '' ";
+                $order = " && `secondaryTag` = '' order by upload_date ";
                 break;
             case "作者未修改":
-                $order = " && `ArtistTag` = '' ";
+                $order = " && `ArtistTag` = '' order by upload_date ";
                 break;
             case "其他標籤未修改":
-                $order = " && `anothertag` = '' ";
+                $order = " && `anothertag` = '' order by upload_date ";
                 break;
         }
         $sel = "SELECT * FROM `img_data`   WHERE `creat_user_id` = {$user_id} && `check_img_type`!='icon' && `check_img_type`!='image' && `check_img_type`!='Wimage'  $order  $sortDES";
