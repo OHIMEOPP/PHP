@@ -1,6 +1,6 @@
 <?php 
     @session_start();
-    $host = "other-mysql";
+    $host = "other-mysql-main";
     $userAccount = "root";
     $userPassword = "J9012015";
     $dbName = "my_db";
