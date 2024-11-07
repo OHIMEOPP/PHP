@@ -74,6 +74,9 @@ input::placeholder,textarea::placeholder{
     color:black;
     opacity: 0.7;
 }
+.custom-cursor {
+    cursor: url('../imageUI/01_suisei_pointer_04.cur'), auto; /* 路徑和備用指標 */
+}
 
 label {
     margin: 0;
